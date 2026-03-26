@@ -31,6 +31,8 @@ export default function SavedWordsView({ name }: { name: string }) {
 	}
 
 	const handleGenerateDeck = async () => {
+		const button = document.getElementById("deck-name-chooser-button");
+		button.classList.add("loading");
 		const url = await createAnkiDeck(savedWords, deckName);
 		if (url) {
 			setBlobUrl(url);
@@ -72,7 +74,7 @@ export default function SavedWordsView({ name }: { name: string }) {
 								<div className="deck-name-chooser">
 									<label className="deck-name-chooser-label">Choose deck name</label>
 									<input className="deck-name-chooser-input" defaultValue={name} onChange={(e: any) => handleDeckNameChange(e)} />
-									<button className="deck-name-chooser-button action-button" onClick={handleGenerateDeck}> Confirm</button>
+									<button id="deck-name-chooser-button" className="action-button" onClick={handleGenerateDeck}> Confirm</button>
 								</div>
 							)
 
