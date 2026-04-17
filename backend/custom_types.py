@@ -38,6 +38,9 @@ class AnkiDeckRequest(BaseModel):
     mined_words: list[MinedWord]
     name: str
 
+class AnkiCleanupRequest(BaseModel):
+    file_path: str
+
 class LookupResponse(BaseModel):
     name: str
     defined_words: list[DefinedWord]

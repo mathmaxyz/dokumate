@@ -23,6 +23,21 @@ class AnkiDeckService extends Base_api {
 
 		return blob;
 	}
+
+	async cleanup_anki_deck(filePath: string): Promise<void> {
+		const url = `${this.base_client_url}/cleanup-anki-deck`;
+		const request = new Request(
+			url,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ file_path: filePath })
+			}
+		)
+
+	}
 }
 
 const service = new AnkiDeckService();
@@ -36,4 +51,8 @@ export async function createAnkiDeck(savedWords: SavedWord[], name: string): Pro
 	console.error("Deck generation failed");
 	//TODO:need to actually create user visible feedback for this with some type of toast
 	return ""
+}
+
+export async function cleanupAnkiDeck(filePath: string): Promise<void> {
+	return await service.cleanup_anki_deck(filePath);
 }

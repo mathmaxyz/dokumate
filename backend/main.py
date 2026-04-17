@@ -10,7 +10,7 @@ from pydantic import BaseModel
 import openai
 from sudachipy import tokenizer
 from sudachipy import dictionary
-from custom_types import LookupRequest, Mode, LookupResponse, GrammarResponse, TranslateRequest, TranslateResponse, AnkiDeckRequest
+from custom_types import LookupRequest, Mode, LookupResponse, GrammarResponse, TranslateRequest, TranslateResponse, AnkiDeckRequest, AnkiCleanupRequest
 import dict_service
 import translate_service
 import anki_deck_service
@@ -67,6 +67,9 @@ def create_anki_deck(request: AnkiDeckRequest):
     file_path = anki_deck_service.create_anki_pkg(241243, request)
     return FileResponse(file_path)
 
+@app.post("/cleanup-anki-deck")
+def cleanup_anki_deck(request: AnkiCleanupRequest):
+    anki_deck_service.cleanup_deck(request.file_path)
 
 @app.get("/health")
 async def health_check():

@@ -1,6 +1,7 @@
 from custom_types import AnkiDeckRequest, MinedWord, Sense
 import genanki
 from pathlib import Path
+from os import remove
 #Implement creation of anki decks
 
 model = genanki.Model(
@@ -80,4 +81,6 @@ def create_anki_pkg(id: int, deck_request: AnkiDeckRequest):
     genanki.Package(deck).write_to_file(file_path)
     return file_path
 
+def cleanup_deck(file_path: str):
+    remove(file_path)
 

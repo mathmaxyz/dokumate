@@ -7,7 +7,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import { useIsMobile } from "../_utils/useIsMobile";
 import SideBarToggle from "./SideBarToggle";
 import SavedWord from "../_types/savedWord";
-import { createAnkiDeck } from "../_api/anki_deck_service";
+import { cleanupAnkiDeck, createAnkiDeck } from "../_api/anki_deck_service";
 
 export default function SavedWordsView({ name }: { name: string }) {
 
@@ -42,8 +42,9 @@ export default function SavedWordsView({ name }: { name: string }) {
 	const handleRevokeUrl = () => {
 		setGenerationPathInitiated(false);
 		setTimeout(() => {
-			URL.revokeObjectURL(blobUrl!)
-			setBlobUrl(null)
+			URL.revokeObjectURL(blobUrl!);
+			setBlobUrl(null);
+			cleanupAnkiDeck()
 		}, 1000)
 	}
 
@@ -51,7 +52,6 @@ export default function SavedWordsView({ name }: { name: string }) {
 		setDeckName(e.target.value);
 	}
 
-	//TODO: Make the confirm button show loading feedback
 	//TODO: Maybe we should make this collapsed by default on desktop too and flash for feeback when a new word is added
 	return (
 		<div className={isOpen && isMobile ? "saved-words-wrapper sidebar-open-mobile" : "saved-words-wrapper"
