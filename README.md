@@ -1,4 +1,4 @@
-# Language Learning App
+# Dokumate: An ML Powered Language Learning App
 
 A language learning web app for learning and practicing Japanese with text, built with python and nextjs.
 
