@@ -18,7 +18,7 @@ export default function SaveWordButton({ entry, originalWord, sentence }: {
 		sentence: sentence
 	};
 
-	let saved = isWordSaved(savedWord.entry);
+	const saved = isWordSaved(savedWord.entry);
 
 	const handleClick = () => {
 		if (saved) {

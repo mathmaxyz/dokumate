@@ -7,7 +7,7 @@ export default class Base_api {
 		this.base_client_url = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL : "http://localhost:8000"
 	}
 
-	async do_request(request: Request | null, message: string) {
+	async do_request(request: Request, message: string) {
 		try {
 			const response = await this.fetch_request(request)
 			if (!response.ok) {
@@ -16,12 +16,12 @@ export default class Base_api {
 
 			const result = await response.json()
 			return result
-		} catch (error: any) {
+		} catch (error) {
 			console.error(error)
 		}
 	}
 
-	async do_blob_request(request: Request | null, message: string) {
+	async do_blob_request(request: Request, message: string) {
 		try {
 			const response = await this.fetch_request(request)
 			if (!response.ok) {
@@ -30,12 +30,12 @@ export default class Base_api {
 
 			const result = await response.blob()
 			return result
-		} catch (error: any) {
+		} catch (error) {
 			console.error(error)
 		}
 	}
 
-	async fetch_request(request: Request | null) {
+	async fetch_request(request: Request) {
 		const response = await fetch(request)
 		return response;
 	}

@@ -1,8 +1,8 @@
 'use client'
 import "../_styles/word.css"
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import DefinedWord from "../_types/definedWord";
-import { autoUpdate, useFloating, useRole, useClick, useDismiss, useInteractions, autoPlacement, size, offset, flip, shift, useId } from '@floating-ui/react';
+import { autoUpdate, useFloating, useRole, useClick, useDismiss, useInteractions, autoPlacement, size, offset, shift } from '@floating-ui/react';
 import BottomModal from "./BottomModal";
 import Tooltip from "./Tooltip"
 import { useIsMobile } from "../_utils/useIsMobile";
@@ -24,7 +24,7 @@ export default function Word({ definedWord }: { definedWord: DefinedWord }) {
 
 	const padding = { top: 100, left: 10, bottom: 10, right: 10 }
 
-	const { refs, floatingStyles, context, middlewareData } = useFloating({
+	const { refs, floatingStyles, context } = useFloating({
 		open: isOpen,
 		onOpenChange: handleOpenChange,
 		middleware: [

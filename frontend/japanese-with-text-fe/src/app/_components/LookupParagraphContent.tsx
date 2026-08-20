@@ -5,11 +5,9 @@ import Word from "./Word";
 import TranslateButton from "./translateButton";
 
 export default function LookupParagraphContent({
-	chunkId,
 	chunk,
 	definedWords
 }: {
-	chunkId: number,
 	chunk: string,
 	definedWords: DefinedWord[]
 }) {
@@ -39,7 +37,6 @@ export default function LookupParagraphContent({
 			))}
 			<TranslateButton
 				ref={buttonRef}
-				chunkId={chunkId}
 				chunk={chunk}
 				onTranslationComplete={handleTranslationFetched}
 				showTranslation={showTranslation}

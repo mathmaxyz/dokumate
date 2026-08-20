@@ -3,11 +3,11 @@ import "../_styles/savedWordView.css"
 import { useSavedWordsStore } from "../_state/savedWordsStore"
 import { useSidebarStore } from "../_state/sidebarStore"
 import SavedWordDisplay from "./SavedWordDisplay";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useIsMobile } from "../_utils/useIsMobile";
 import SideBarToggle from "./SideBarToggle";
 import SavedWord from "../_types/savedWord";
-import { cleanupAnkiDeck, createAnkiDeck } from "../_api/anki_deck_service";
+import { createAnkiDeck } from "../_api/anki_deck_service";
 
 export default function SavedWordsView({ name }: { name: string }) {
 
@@ -31,8 +31,9 @@ export default function SavedWordsView({ name }: { name: string }) {
 	}
 
 	const handleGenerateDeck = async () => {
+		// TODO: replace DOM poking with React state.
 		const button = document.getElementById("deck-name-chooser-button");
-		button.classList.add("loading");
+		button?.classList.add("loading");
 		const url = await createAnkiDeck(savedWords, deckName);
 		if (url) {
 			setBlobUrl(url);
@@ -44,11 +45,11 @@ export default function SavedWordsView({ name }: { name: string }) {
 		setTimeout(() => {
 			URL.revokeObjectURL(blobUrl!);
 			setBlobUrl(null);
-			cleanupAnkiDeck()
+			// TODO: server-side deck cleanup is not wired up.Fixing it needs the backend to return the generated path 
 		}, 1000)
 	}
 
-	const handleDeckNameChange = (e: any) => {
+	const handleDeckNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setDeckName(e.target.value);
 	}
 
@@ -73,7 +74,7 @@ export default function SavedWordsView({ name }: { name: string }) {
 							(
 								<div className="deck-name-chooser">
 									<label className="deck-name-chooser-label">Choose deck name</label>
-									<input className="deck-name-chooser-input" defaultValue={name} onChange={(e: any) => handleDeckNameChange(e)} />
+									<input className="deck-name-chooser-input" defaultValue={name} onChange={handleDeckNameChange} />
 									<button id="deck-name-chooser-button" className="action-button" onClick={handleGenerateDeck}> Confirm</button>
 								</div>
 							)

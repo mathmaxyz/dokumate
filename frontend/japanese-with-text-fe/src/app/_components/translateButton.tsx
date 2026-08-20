@@ -4,12 +4,11 @@ import { useState, forwardRef } from 'react';
 import { translateText } from "../_api/text_process_service";
 
 const TranslateButton = forwardRef<HTMLButtonElement, {
-	chunkId: number,
 	chunk: string,
 	onTranslationComplete: (translation: string) => void,
 	showTranslation: boolean,
-	translation: string
-}>(({ chunkId, chunk, onTranslationComplete, showTranslation, translation }, ref) => {
+	translation: string | null
+}>(({ chunk, onTranslationComplete, showTranslation, translation }, ref) => {
 
 	const [isTranslating, setIsTranslating] = useState<boolean>(false);
 
@@ -41,5 +40,7 @@ const TranslateButton = forwardRef<HTMLButtonElement, {
 		</button>
 	);
 });
+
+TranslateButton.displayName = "TranslateButton";
 
 export default TranslateButton;

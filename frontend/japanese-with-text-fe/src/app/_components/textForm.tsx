@@ -8,8 +8,9 @@ export default function TextForm() {
 	const [text, setText] = useState<string>("");
 
 	const handleClick = () => {
+		// TODO: replace DOM poking with React state.
 		const button = document.getElementById("analyze-button");
-		button.classList.add("loading");
+		button?.classList.add("loading");
 	}
 
 	return (

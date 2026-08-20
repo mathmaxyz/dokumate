@@ -12,7 +12,7 @@ export default function AnalyzedText({ id, children }: { id: string, children: R
 	const { textId, setTextId, clearWords } = useSavedWordsStore();
 
 	useEffect(() => {
-		if (id != textId) {
+		if (id !== textId) {
 			clearWords();
 			setTextId(id);
 		}

@@ -4,13 +4,11 @@ import LookupResponse from "../_types/lookupResponse";
 import LookupParagraphContent from "./LookupParagraphContent";
 
 export default async function LookupParagraph({
-	chunkId,
 	chunk,
 	lookupData
 }: {
-	chunkId: number,
 	chunk: string,
-	lookupData: LookupResponse
+	lookupData: LookupResponse | null
 }) {
 	let data = lookupData;
 	let definedWords: DefinedWord[] = [];
@@ -24,7 +22,6 @@ export default async function LookupParagraph({
 
 	return (
 		<LookupParagraphContent
-			chunkId={chunkId}
 			chunk={chunk}
 			definedWords={definedWords}
 		/>
